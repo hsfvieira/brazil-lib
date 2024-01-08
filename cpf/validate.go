@@ -18,13 +18,7 @@ var weights = [10]int{
   2,
 }
 
-func firstDigit(numbers []int) int {
-  total := 0
-  
-  for i, v := range numbers {
-    total += v * weights[i + 1]
-  }
-
+func checkTotal(total int) int {
   rest := total % 11
 
   if rest < 2 {
@@ -34,6 +28,16 @@ func firstDigit(numbers []int) int {
   return 11 - rest
 }
 
+func firstDigit(numbers []int) int {
+  total := 0
+  
+  for i, v := range numbers {
+    total += v * weights[i + 1]
+  }
+
+  return checkTotal(total)
+}
+
 func secondDigit(numbers []int) int {
   total := 0
   
@@ -41,13 +45,7 @@ func secondDigit(numbers []int) int {
     total += v * weights[i]
   }
 
-  rest := total % 11
-
-  if rest < 2 {
-    return 0
-  }
-
-  return 11 - rest
+  return checkTotal(total)
 }
 
 func Validate(cpf string) (bool, error) {
